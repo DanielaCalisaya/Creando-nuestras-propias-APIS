@@ -10,7 +10,7 @@ const moviesRoutes = require('./routes/moviesRoutes');
 const genresRoutes = require('./routes/genresRoutes');
 
 //Aquí pueden colocar las rutas de las APIs
-
+const apiRouter = require('./routes/api/genresApiRoutes')
 
 // view engine setup
 app.set('views', path.resolve(__dirname, './views'));
@@ -27,6 +27,7 @@ app.use(methodOverride('_method'));
 app.use('/', indexRouter);
 app.use(moviesRoutes);
 app.use(genresRoutes);
+app.use(apiRouter);
 
 
 //Activando el servidor desde express
