@@ -1,5 +1,7 @@
 # Creando nuestras propias APIS
 
+![cover](public/img/portada.png)
+
 ## Objetivo
 Hasta ahora toda la comunicación entre el cliente y el servidor sigue el esquema habitual
 de pedido y respuesta, donde NodeJS entrega la vista terminada al navegador. Si el cliente
@@ -82,3 +84,7 @@ funcionalidad la pueden usar:
 
 Así que les toca ponerse a pensar qué APIs van a desarrollar en su proyecto integrador
 🤓🚀.
+
+## Clase 89
+
+## Ubicación -> Programación/TRABAJOS PRACTICOS/Creando nuestras propias APIS 
