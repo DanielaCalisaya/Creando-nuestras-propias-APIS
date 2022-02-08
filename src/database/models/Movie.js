@@ -11,19 +11,50 @@ module.exports = (sequelize, dataTypes) => {
         // updated_at: dataTypes.TIMESTAMP,
         title: {
             type: dataTypes.STRING(500),
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notNull: {
+                    args: true,
+                    msg: 'Title cannot be null'
+                },
+                notEmpty: {
+                    args: true,
+                    msg: 'White the movie title'
+                }
+            }
         },
         rating: {
             type: dataTypes.DECIMAL(3, 1).UNSIGNED,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notNull: {
+                    args: true,
+                    msg: 'Rating cannot be null'
+                },
+                notEmpty: {
+                    args: true,
+                    msg: 'White the rating of the movie'
+                }
+            }
         },
         awards: {
             type: dataTypes.BIGINT(10).UNSIGNED,
-            allowNull: false
+            allowNull: false,
+            defaultValue: '0'
         },
         release_date: {
             type: dataTypes.DATEONLY,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                notNull: {
+                    args: true,
+                    msg: 'Field release_date cannot be null'
+                },
+                notEmpty: {
+                    args: true,
+                    msg: 'You have to indicate the release date of the movie'
+                }
+            }
         },
         length: dataTypes.BIGINT(10),
         genre_id: dataTypes.BIGINT(10)
