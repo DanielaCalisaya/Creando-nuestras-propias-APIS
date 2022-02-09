@@ -2,7 +2,7 @@ const db = require('../../database/models');
 const getUrl = (req) => `${req.protocol}://${req.get('host')}${req.originalUrl}`
 
 
-moduule.exports = {
+module.exports = {
    
     getAll: (req, res) => {
         db.Movie.findAll({

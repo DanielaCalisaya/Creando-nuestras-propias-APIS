@@ -30,27 +30,33 @@ module.exports = {
             })
         }) 
     },
-    fetch: (req, res) => {
-        fetch('https://restcountries.com/v3.1/all')
-        .then(response => response.json())
-        .then(countries => {
+    /* fetch */
+    fetch: (req, res) => { /* consumirá toda la información de los paises-datos de otra pagina no de nuestra base de dstos */
+        fetch('https://restcountries.com/v3.1/all') 
+        .then(response => response.json())  /* El fetch me devuleve la promesa y lo capturamos con el primer then y la transformaremos en json*/
+        .then(countries => { /* Este segundo then ya consume los datos */
             res.render('countries', {countries})
         })
     },
-    fetch2: (req, res) => {
+    /* axios */
+    fetch2: (req, res) => {  /* axios me permite hacer lo mismo pero quizas con menos código, si necesta el método http(get, post, etc) */
         axios.get('http://localhost:3001/api/genres')
-        .then(result => {
+        .then(result => { /* la informacion que pediremos estará dentro de una propiedad que se llama data */
             res.render('genresList', {
-                genres: result.data.data
+                genres: result.data.data /* el pimer data es el de axios que siempre necesitaremos el segundo es el que creamos */
             })
         })
 
-       /*  fetch('http://localhost:3001/api/genres')
-        .then(response => response.json())
-        .then(genres => {
-            res.render('genresList', {
-                genres : genres.data
-            })
-        }) */
+         /* API interna */
+      /*fetch2:(req, res) => {  Podemos crear apis propias para nuestro carrito de compras
+            fetch('http://localhost:3001/api/genres')
+                .then(response => response.json())
+                .then(genres => {
+                    res.render('genresList', {
+                         genres : genres.data
+                })
+            }) 
+        }*/
+
     }
 }
