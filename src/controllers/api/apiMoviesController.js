@@ -1,31 +1,33 @@
 const db = require('../../database/models');
+/* Cuando queramos pasar el endpoint pasamos esta funcion getUrl y le psamos el objeto req */
 const getUrl = (req) => `${req.protocol}://${req.get('host')}${req.originalUrl}`
-
+/* En vez de usar el navegador usaremos postman para testear */
 
 module.exports = {
    
     getAll: (req, res) => {
         db.Movie.findAll({
             include: [
-                {association: 'genres'},
+                {association: 'genre'},
                 {association: 'actors'}
             ]
         })
         .then((movies) => {
             return res.status(200).json({
-                meta: {
+                meta: {  /* propiedad meta, ahi guardaremos el endpoint */
                     endpoint: getUrl(req),
-                    status: 200,
+                    status: 200, /* En el caso de que venga todo bien un 200 */
                     total: movies.length
                 },
                 data: movies
             })
         })
         .catch((error) => {
-            if(error.name === 'SequelizeConnectionRefusedError'){
-                res.status(500).json({ msg: "Tenemos un error, disculpe"})
+            if(error.name === 'SequelizeConnectionRefusedError'){ /* si ese es el error, envia ese mensaje, en donde podemos poner una vista */
+                res.status(500).json({ msg: "Tenemos un error, disculpe"}) /* o .send('Tenemos un error, disculpe') */
             }
-         })     
+        })     
+        /* .catch((error) => res.status(400).send(error)) */
     },
     getOne: (req, res) => {
         if(req.params.id % 1 !== 0 || req.params.id < 0){

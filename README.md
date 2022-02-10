@@ -85,6 +85,6 @@ funcionalidad la pueden usar:
 Así que les toca ponerse a pensar qué APIs van a desarrollar en su proyecto integrador
 🤓🚀.
 
-## Clase 89, 90
+## Clase 89, 90 y 91
 
 ## Ubicación -> Programación/TRABAJOS PRACTICOS/Creando nuestras propias APIS 

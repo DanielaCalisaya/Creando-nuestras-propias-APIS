@@ -1,4 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
+
     let alias = 'Movie'; // esto debería estar en singular
     let cols = {
         id: {
@@ -11,10 +12,11 @@ module.exports = (sequelize, dataTypes) => {
         // updated_at: dataTypes.TIMESTAMP,
         title: {
             type: dataTypes.STRING(500),
-            allowNull: false,
-            validate: {
+            allowNull: false, /* allowNull -> acepta nulos? No puede tener el campo vacio*/
+            /* validaciones */
+            validate: { /* dentro de validate pasaremos un objeto, alli serán las configuraciones de las validaciones */
                 notNull: {
-                    args: true,
+                    args: true, /* argumentos */
                     msg: 'Title cannot be null'
                 },
                 notEmpty: {
@@ -40,7 +42,7 @@ module.exports = (sequelize, dataTypes) => {
         awards: {
             type: dataTypes.BIGINT(10).UNSIGNED,
             allowNull: false,
-            defaultValue: '0'
+            defaultValue: '0' //En caso de que no tenga premio
         },
         release_date: {
             type: dataTypes.DATEONLY,
