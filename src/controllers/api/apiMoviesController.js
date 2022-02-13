@@ -33,8 +33,8 @@ module.exports = {
         if(req.params.id % 1 !== 0 || req.params.id < 0){
             return res.status(400).json({ /* 400 esta haciendo mal la peticiom */
                 meta: {
-                status: 400,
-                msg: 'Wrong ID'
+                    status: 400,
+                    msg: 'Wrong ID'
                 }
             })
         }else{
@@ -64,7 +64,7 @@ module.exports = {
                         }
                     })
                 }
-            })
+            }) /* la ruta en postman seria por get http://localhost:3001/apis/movies/10 (ej) */
             .catch((error) => res.status(500).send(error))
         }
     },
@@ -78,7 +78,7 @@ module.exports = {
             length,
             genre_id
         })
-        .then((movie) => {
+        .then((movie) => { /* captura los errores que pueden haber ahora con la creacion con sequelize */
             res.status(201).json({
                 meta: {
                     endpoint: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
@@ -89,16 +89,16 @@ module.exports = {
         })
         .catch((error) => {
             switch(error.name) {
-                case 'SequelizeValidationError':
-                    let errorsMsg = [];
+                case 'SequelizeValidationError': /* ordenamos los errores para que se vean de una manera más amigable */
+                    let errorsMsg = []; /* con las tres variables guardamos los errores */
                     let notNullErrors = [];
                     let validationsErrors = [];
                     error.errors.forEach((error) => {
-                        errorsMsg.push(error.message);
-                        if(error.type == 'Validation error'){
-                            validationsErrorspush(error.message);
+                        errorsMsg.push(error.message); /* del error que recorro guardare la propiedad mensaje */
+                        if(error.type == 'Validation error'){ /* si el error que recorro en este momento es de tipo validation error */
+                            validationsErrors.push(error.message);
                         }
-                        if(error.type == 'notNull Violation'){
+                        if(error.type == 'notNull Violation'){ /* si sale este otro error */
                             notNullErrors.push(error.message)
                         }
                     });
@@ -113,8 +113,8 @@ module.exports = {
                         }
                     }
                     return res.status(400).json(response);
-                    default:
-                        return res.status(500).json(error)
+                default:
+                    return res.status(500).json(error)
             }
         })
     },
@@ -155,12 +155,12 @@ module.exports = {
                 favourite_movie_id: req.params.id
             }
         });
-        let actorMovieUpdate = db.actor_movie.destroy({
+        let actorMovieUpdate = db.actor_movie.destroy({ /* trabaja con la tabla pivot */
             where: {
                 movie_id: req.params.id
             },
         });
-        Promise.all([actorUpdate, actorMovieUpdate]).then(
+        Promise.all([actorUpdate, actorMovieUpdate]).then(  /* se lanzan dos promesas */
             db.Movie.destroy({
                where: {
                    id: req.params.id
@@ -181,3 +181,6 @@ module.exports = {
         )
     }
 }
+
+/* para el POST en Postman cambiamos el método POST del http y seleccionamos body
+debajo escribiriamos las caracteristicas en formato json */
