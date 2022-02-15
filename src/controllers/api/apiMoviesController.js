@@ -148,14 +148,14 @@ module.exports = {
     },
     delete: (req, res) => {
         let actorUpdate = db.Actor.update({
-            favourite_movie_id: null,
+            favorite_movie_id: null,
         },
         {
             where: {
-                favourite_movie_id: req.params.id
+                favorite_movie_id: req.params.id
             }
         });
-        let actorMovieUpdate = db.actor_movie.destroy({ /* trabaja con la tabla pivot */
+        let actorMovieUpdate = db.ActorMovie.destroy({ /* trabaja con la tabla pivot */
             where: {
                 movie_id: req.params.id
             },
@@ -181,6 +181,10 @@ module.exports = {
         )
     }
 }
+
+/* en el caso de la foreignKey de actors de movies_db en los datos de la misma 
+al On Delete y al On Update le cambiamos el valor de restrict a set null, 
+entonces ahi no trae errores al borrar */
 
 /* para el POST en Postman cambiamos el método POST del http y seleccionamos body
 debajo escribiriamos las caracteristicas en formato json */
