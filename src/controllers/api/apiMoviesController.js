@@ -81,10 +81,10 @@ module.exports = {
         .then((movie) => { /* captura los errores que pueden haber ahora con la creacion con sequelize */
             res.status(201).json({
                 meta: {
-                    endpoint: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
+                    endpoint: `${req.protocol}://${req.get('host')}/movies/${movie.id}`, 
                     msg: 'Movie added successfully',
                 },
-                data: movie
+                data: movie,
             })
         })
         .catch((error) => {

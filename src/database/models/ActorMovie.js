@@ -1,4 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
+
     let alias = 'ActorMovie';
     let cols = {
         id: {
@@ -24,5 +25,7 @@ module.exports = (sequelize, dataTypes) => {
     }
     const ActorMovie = sequelize.define(alias, cols, config); 
 
+    
     return ActorMovie;
+
 };
